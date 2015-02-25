@@ -13,7 +13,7 @@
     #endif
 
     void main(void) {
-        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
     }
 </script>
 
@@ -24,7 +24,7 @@
     uniform mat4 uPMatrix;
 
     void main(void) {
-        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 2.0);//cambia el tamaño de las figuras
     }
 </script>
 
@@ -175,7 +175,7 @@
         initShaders();
         initBuffers();
 
-       	gl.clearColor(0.5, 0, 0.5, 7.5);
+       	gl.clearColor(1.0, 1.0, 0.0, 1.0);//pinta el fondo
         gl.enable(gl.DEPTH_TEST);
 
         drawScene();
