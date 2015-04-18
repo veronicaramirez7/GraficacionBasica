@@ -17,11 +17,20 @@ Sprite::Sprite(OpenGlImplement *openGlImplement){
 
 Sprite::~Sprite()
 {
-	SDL_FreeSurface(imagen);
+	delete [] vertexBufferObject;
+	delete[] indexBufferObject;
+	delete[] textureBufferObject;
+	delete[] textureObject;
+
+	delete[] vertexPositions;
+	delete[] vertexTextures;
+	delete[] vertexIndex;
+
+	delete[] vertexNormals;
 }
 
 void Sprite::CreateTextures(char* name){
-	imagen = SDL_LoadBMP(name);
+	SDL_Surface * imagen = SDL_LoadBMP(name);
 
 	if (!imagen)
 	{
@@ -124,6 +133,10 @@ void Sprite::CreateTextures(char* name){
 	void Sprite::TranslateXY(GLfloat x, GLfloat y){
 		translate_x = x;
 		translate_y = y;
+	}
+
+	void Sprite::TranslateZ(GLfloat z){
+		translate_z = z;
 	}
 
 	void Sprite::TranslateXYDraw(GLfloat x, GLfloat y){
@@ -264,7 +277,7 @@ void Sprite::CreateTextures(char* name){
 				// Extract tokens
 				strtok(l, " ");
 				for (int i = 0; i < 3; i++)
-					vertexPositions[(p * 3) + i] = openGlImplement->ConvertCOORDf(atoi(strtok(NULL, " ")));
+					vertexPositions[(p * 3) + i] = openGlImplement->ConvertCOORDf(atof(strtok(NULL, " ")));
 
 				// Wrap up
 				delete[] l;

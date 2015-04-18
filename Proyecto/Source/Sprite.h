@@ -16,7 +16,6 @@ class Sprite{
 	bool isVisible;
 	bool automovimiento;
 	
-	SDL_Surface * imagen;//La imagen a manipular
 	SpriteDef spriteDef;//definiciones de sprite
 
 public:
@@ -41,6 +40,7 @@ public:
 	
 	void TranslateXYZ(GLfloat x, GLfloat y, GLfloat z);
 	void TranslateXY(GLfloat x, GLfloat y);
+	void TranslateZ(GLfloat z);
 	void TranslateXYDraw(GLfloat x, GLfloat y);
 	void RotateXYZ(GLfloat x, GLfloat y, GLfloat z);
 	void ScaleXYZ(GLfloat x, GLfloat y, GLfloat z);

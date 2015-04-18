@@ -68,9 +68,18 @@ void CGame::CargandoObjetos()
 }
 // Con esta función eliminaremos todos los elementos en pantalla
 void CGame::Finalize(){
-	delete(nave);
-	
-	SDL_Quit();
+	delete menuFondo;
+	delete textoTitulo;
+	delete textoNombre;
+	delete textoOpcion1;
+	delete textoOpcion2;
+	delete textoOpcion1Sel;
+	delete textoOpcion2Sel;
+	delete nave;
+	delete jugandoFondo;
+	delete ganasteFondo;
+	delete perdisteFondo;
+	openGlImplement.QuitShaders();
 }
 
 bool CGame::Start()
@@ -109,19 +118,11 @@ bool CGame::Start()
 			JugandoPintar();
 			break;
 		case Estado::ESTADO_FINALIZANDO:
-			estadoJuego = Estado::ESTADO_ESPERANDO;
-			salirJuego = false;
-			openGlImplement.QuitShaders();
-			SDL_Quit();
-
+			salirJuego = true;
 			break;
 		case Estado::ESTADO_TERMINANDO:
 			TerminadoPintar();
 			TerminadoActualizar();
-			break;
-
-		case Estado::ESTADO_ESPERANDO:
-
 			break;
 		};
 
@@ -232,7 +233,8 @@ void CGame::JugandoPintar(){
 	}
 	if (vida <= CERO)
 		estadoJuego = ESTADO_TERMINANDO;
-
+	nave->GetNaveObjeto()->ScaleXYZ(30.f, 30.f, 30.f);
+	nave->GetNaveObjeto()->TranslateZ(-0.f);
 	nave->Draw();
 	for (int i = 0; i < nivel[nivelActual].Enemigos_VisiblesAlMismoTiempo; i++)
 	{
